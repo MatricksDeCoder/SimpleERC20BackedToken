@@ -1,1 +1,1 @@
-## Simple ERC20 Backed Token
+### Simple ERC20 Backed Token
