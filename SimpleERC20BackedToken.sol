@@ -29,7 +29,7 @@ contract SimpleERC20BackedToken is ERC20 {
         require(_amount <= balanceOf(msg.sender), 'Insufficient balance');
         // at 1:1 ration can be any ratio based on something... e.g some token engineering
         _burn(msg.sender, _amount);
-        collateralToken.transfer(_amount);
+        collateralToken.transfer(_amount/price);
     }
     
 }
