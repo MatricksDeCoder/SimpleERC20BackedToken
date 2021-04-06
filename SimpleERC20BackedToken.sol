@@ -5,8 +5,8 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 
 /**
- * @title SimpleERC20BackedToken
- * @dev   Collateral backed Token, based on some other ERC20 Token
+ * @title  SimpleERC20BackedToken
+ * @dev    Collateral backed Token, based on some other ERC20 Token
  */
  
 contract SimpleERC20BackedToken is ERC20 {
