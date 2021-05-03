@@ -15,19 +15,21 @@ contract SimpleERC20BackedToken is ERC20 {
     // price can come from some Oracle etc 
     uint price = 1;
     
-    constructor(address _collateralToken) ERC20('SimpleERC20BackedToken', 'SEBT') {}
+    constructor(address _collateralToken) ERC20('SimpleERC20BackedToken', 'SEBT') {
+     collateralToken = IERC20(_collateralToken);
+    }
     
     // deposit token as collateral to get Token
     function deposit(uint _amountCollateralToken) external  {
-        uint _amountBakedToken = _amountColleteralToken*price;
-        collateralToken.transferFrom(msg.sender, address(this), _amountCollateralToken);
+        uint _amountBackedToken = _amountCollateralToken*price;
+        collateralToken.transferFrom(msg.sender, address(this),_amountCollateralToken);
         _mint(msg.sender, _amountBackedToken);
     }
     
-    // withdraw (unwrap ether) to get back Ether by burning Simple Wrapped Ether amount
+    // withdraw (unwrap backedToken) to get back the collateral Token
     function withdraw(uint _amount) external {
         require(_amount <= balanceOf(msg.sender), 'Insufficient balance');
-        // at 1:1 ration can be any ratio based on something... e.g some token engineering
+        // at 1:1 ratio can be any ratio based on something... e.g some token engineering
         _burn(msg.sender, _amount);
         collateralToken.transfer(_amount/price);
     }
